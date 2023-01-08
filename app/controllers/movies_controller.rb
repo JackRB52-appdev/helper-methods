@@ -6,7 +6,7 @@ class MoviesController < ApplicationController
   def index
     matching_movies = Movie.all
 
-    @list_of_movies = matching_movies.order({ :created_at => :desc })
+    @list_of_movies = matching_movies.order(created_at: :desc )
 
     respond_to do |format|
       format.json do
@@ -20,7 +20,7 @@ class MoviesController < ApplicationController
   def show
     the_id = params.fetch(:id)
 
-    matching_movies = Movie.where({ :id => the_id })
+    matching_movies = Movie.where(id: the_id )
 
     @the_movie = matching_movies.first
 
@@ -42,7 +42,7 @@ class MoviesController < ApplicationController
   def edit
     the_id = params.fetch(:id)
 
-    matching_movies = Movie.where({ :id => the_id })
+    matching_movies = Movie.where(id: the_id )
 
     @the_movie = matching_movies.first
 
@@ -50,7 +50,7 @@ class MoviesController < ApplicationController
 
   def update
     the_id = params.fetch(:id)
-    the_movie = Movie.where({ :id => the_id }).first
+    the_movie = Movie.where(id: the_id ).first
 
     the_movie.title = params.fetch("query_title")
     the_movie.description = params.fetch("query_description")
@@ -65,7 +65,7 @@ class MoviesController < ApplicationController
 
   def destroy
     the_id = params.fetch(:id)
-    the_movie = Movie.where({ :id => the_id }).first
+    the_movie = Movie.where(id: the_id ).first
 
     the_movie.destroy
 
