@@ -1,15 +1,22 @@
 require "application_system_test_case"
 
 class MoviesTest < ApplicationSystemTestCase
-  test "visiting the index" do
-    visit "/movies"
+  test "movies header" do 
+    visit movies_path
     assert_selector "h1", text: "List of all movies"
+  end
+
+  test "new movie button" do
+    visit movies_path
+    click_on "Add a new movie"
+
+    assert_selector "h1", text: "New movie"
   end
 
   test "creating a Movie" do
     original_movie_count = Movie.count
 
-    visit "/movies"
+    visit movies_path
     click_on "Add a new movie"
 
     fill_in "Description", with: "A new movie's descroption"
@@ -25,7 +32,7 @@ class MoviesTest < ApplicationSystemTestCase
   test "updating a Movie" do
     @movie = movies(:one)
 
-    visit "/movies/#{@movie.id}/edit"
+    visit edit_movie_path(@movie)
 
     fill_in "Description", with: "Some other description"
     fill_in "Title", with: "Some other title"
@@ -43,7 +50,7 @@ class MoviesTest < ApplicationSystemTestCase
     @movie = movies(:one)
     original_movie_count = Movie.count
 
-    visit "/movies"
+    visit movies_path
     click_on "Show details", match: :first
     click_on "Delete movie"
 
@@ -52,4 +59,5 @@ class MoviesTest < ApplicationSystemTestCase
     ending_movie_count = Movie.count
     assert_equal original_movie_count - 1, ending_movie_count
   end
+
 end
