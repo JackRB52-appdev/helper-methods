@@ -8,7 +8,7 @@ class MoviesController < ApplicationController
 
     respond_to do |format|
       format.json do
-        render json: @list_of_movies
+        render json: @movies
       end
 
       format.html
